@@ -1,7 +1,6 @@
 {{- /* chezmoi:modify-template */ -}}
 
 {{- $result := fromJson .chezmoi.stdin -}}
-{{- writeToStdout $result -}}
 
 {{- /* Delete features.buildkit as it is now the default */ -}}
 {{- $result := deleteValueAtPath "features.buildkit" $result -}}
@@ -12,7 +11,7 @@
 {{- /* Set credentials helper */ -}}
 {{- $keyName := "credsStore" -}}
 {{- if and .is_gnome (not .is_headless) -}}
-{{-   $result = setValueAtPath $keyName "secretservice" $result -}}
+{{-   $result = $result | setValueAtPath $keyName "secretservice" -}}
 {{- else -}}
 {{-   $result := deleteValueAtPath $keyName $result -}}
 {{- end -}}

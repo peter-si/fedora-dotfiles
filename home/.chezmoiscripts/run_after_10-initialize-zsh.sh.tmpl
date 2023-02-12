@@ -10,7 +10,6 @@ if ! getent passwd '{{ .chezmoi.username }}' | cut -d : -f 7- | grep -q "^${zsh_
   c sudo usermod --shell "${zsh_path}" '{{ .chezmoi.username }}'
 fi
 
-log_task "Initializing ZSH"
+log_task "Installing zplug"
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-zplug install
 

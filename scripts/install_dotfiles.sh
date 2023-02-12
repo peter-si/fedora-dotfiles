@@ -64,15 +64,15 @@ git_clean() {
 }
 
 DOTFILES_REPO_HOST=${DOTFILES_REPO_HOST:-"https://github.com"}
-DOTFILES_USER=${DOTFILES_USER:-"felipecrs"}
-DOTFILES_REPO="${DOTFILES_REPO_HOST}/${DOTFILES_USER}/dotfiles"
+DOTFILES_USER=${DOTFILES_USER:-"peter-si"}
+DOTFILES_REPO="${DOTFILES_REPO_HOST}/${DOTFILES_USER}/fedora-dotfiles"
 DOTFILES_BRANCH=${DOTFILES_BRANCH:-"master"}
 DOTFILES_DIR="${HOME}/.dotfiles"
 
 if ! command -v git >/dev/null 2>&1; then
   log_task "Installing git"
-  sudo apt update --yes
-  sudo apt install git --yes
+  sudo dnf update -y
+  sudo dnf install git -y
 fi
 
 if [ -d "${DOTFILES_DIR}" ]; then
@@ -84,8 +84,6 @@ fi
 
 if [ -f "${DOTFILES_DIR}/install.sh" ]; then
   INSTALL_SCRIPT="${DOTFILES_DIR}/install.sh"
-elif [ -f "${DOTFILES_DIR}/install" ]; then
-  INSTALL_SCRIPT="${DOTFILES_DIR}/install"
 else
   error "No install script found in the dotfiles."
 fi

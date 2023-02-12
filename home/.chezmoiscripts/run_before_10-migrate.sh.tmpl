@@ -6,9 +6,6 @@
 
 # {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/scripts-library") }}
 
-# The following line is for ShellCheck to correctly identify the above included library
-true || source ../.chezmoitemplates/scripts-library
-
 migrated=false
 
 # Migrate from .chezmoi.toml.tmpl to chezmoi.yaml.tmpl

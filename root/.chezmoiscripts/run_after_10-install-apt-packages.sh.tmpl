@@ -2,11 +2,7 @@
 
 # {{ template "scripts-library" }}
 
-# The following line is for ShellCheck to correctly identify the above included library
-true || source ../.chezmoitemplates/scripts-library
-
 readonly wanted_packages=(
-  apt-transport-https
   ca-certificates
   gnupg
   lsb-release
@@ -37,6 +33,7 @@ readonly wanted_packages=(
   gnome-menus
   code
   google-chrome-stable
+  firefox
   python3-nautilus
   # {{   if not .is_wsl }}
   yaru-theme-gnome-shell
@@ -44,12 +41,6 @@ readonly wanted_packages=(
   gnome-menus
   # {{   end }}
   # {{ end }}
-  # {{ if .is_wsl }}
-  wslu
-  # {{ else }}
-  # {{   if eq .chezmoi.osRelease.versionCodename "focal" }}
-  linux-generic-hwe-20.04
-  # {{   end }}
   # {{ end }}
 )
 missing_packages=()
@@ -63,6 +54,6 @@ done
 if [[ ${#missing_packages[@]} -gt 0 ]]; then
   log_task "Installing missing packages with APT: ${missing_packages[*]}"
 
-  c apt update --yes
-  c apt install --yes --install-recommends "${missing_packages[@]}"
+  c dnf update -y
+  c dnf install -y "${missing_packages[@]}"
 fi

@@ -104,7 +104,7 @@ function sudo() {
 function is_apt_package_installed() {
   local package="$1"
 
-  apt list --quiet --quiet --installed "${package}" 2>/dev/null | grep --quiet .
+  dnf list --installed --quiet "${package}" 2>/dev/null | grep --quiet .
 }
 
 function not_during_test() {

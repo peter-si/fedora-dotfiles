@@ -2,9 +2,6 @@
 
 # {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/scripts-library") }}
 
-# The following line is for ShellCheck to correctly identify the above included library
-true || source ../.chezmoitemplates/scripts-library
-
 readonly unwanted_packages=(
   gcmcore
   direnv
@@ -15,6 +12,6 @@ readonly unwanted_packages=(
 for package in "${unwanted_packages[@]}"; do
   if is_apt_package_installed "${package}"; then
     log_task "Removing unwanted package '${package}' installed with APT"
-    c apt remove --yes "${package}"
+    c dnf remove -y "${package}"
   fi
 done

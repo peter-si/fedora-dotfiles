@@ -5,18 +5,15 @@
 
 # {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/scripts-library") }}
 
-# The following line is for ShellCheck to correctly identify the above included library
-true || source ../.chezmoitemplates/scripts-library
-
 log_task "Upgrading ca-certificates"
 
 # Ignore apt update error if it is due to expired certificate (because chances are that
 # the next command will fix it.
-if output="$(c sudo apt update --yes)" || [[ "${output}" == *"The certificate chain uses expired certificate."* ]]; then
+if output="$(c sudo dnf update -y)" || [[ "${output}" == *"The certificate chain uses expired certificate."* ]]; then
   echo "${output}"
   true
 else
   echo "${output}"
   exit 1
 fi
-c sudo apt install --yes --no-install-recommends ca-certificates
+c sudo dnf install -y ca-certificates

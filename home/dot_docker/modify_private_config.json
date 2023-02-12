@@ -9,13 +9,10 @@
 {{- $result := deleteValueAtPath "aliases.builder" $result -}}
 
 {{- /* Set credentials helper */ -}}
-{{- $keyName := "credsStore" -}}
-{{- if .is_wsl -}}
-{{-   $result = setValueAtPath $keyName "wincred.exe" $result -}}
-{{- else if and .is_gnome (not .is_headless) -}}
-{{-   $result = setValueAtPath $keyName "secretservice" $result -}}
+{{- if and .is_gnome (not .is_headless) -}}
+{{-   $result = setValueAtPath "credsStore" "secretservice" $result -}}
 {{- else -}}
-{{-   $result := deleteValueAtPath $keyName $result -}}
+{{-   $result := deleteValueAtPath "credsStore" $result -}}
 {{- end -}}
 
 {{- /* If there is no output, chezmoi deletes the file */ -}}

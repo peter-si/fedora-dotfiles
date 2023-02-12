@@ -28,9 +28,9 @@ readonly wanted_packages=(
   skopeo
   asciinema
   # {{ if .is_gnome }}
-#  yaru-theme-gtk
-#  yaru-theme-icon
-#  yaru-theme-sound
+  yaru-theme
+  yaru-icon-theme
+  yaru-sound-theme
   gnome-tweaks
   gnome-menus
 #  code
@@ -38,7 +38,7 @@ readonly wanted_packages=(
   firefox
   python3-nautilus
   # {{   if not .is_wsl }}
-#  yaru-theme-gnome-shell
+  gnome-shell-theme-yaru
 #  libsecret-1-0
   gnome-menus
   # {{   end }}

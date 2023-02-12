@@ -11,7 +11,7 @@
 {{- /* Set credentials helper */ -}}
 {{- $keyName := "credsStore" -}}
 {{- if and .is_gnome (not .is_headless) -}}
-{{-   $result = $result | setValueAtPath $keyName "secretservice" -}}
+{{-   $result = set $result $keyName "secretservice" -}}
 {{- else -}}
 {{-   $result := deleteValueAtPath $keyName $result -}}
 {{- end -}}
